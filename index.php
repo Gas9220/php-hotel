@@ -52,7 +52,7 @@ $hotels = [
 </head>
 
 <body>
-    <?php foreach ($hotels as $hotel) { ?>
+    <!-- <?php foreach ($hotels as $hotel) { ?>
         <div class="hotel">
             <h4><?php echo $hotel['name'] ?></h4>
             <ul>
@@ -62,8 +62,28 @@ $hotels = [
                 <li><?php echo $hotel['distance_to_center'] ?></li>
             </ul>
         </div>
-    <?php } ?>
+    <?php } ?> -->
 
+    <table class="table">
+        <thead>
+            <tr>
+                <?php foreach ($hotels[0] as $key => $hotel_option) { ?>
+                    <th scope="col"><?php echo ucwords($key) ?></th>
+                <?php } ?>
+            </tr>
+        </thead>
+        <?php foreach ($hotels as $key => $hotel) { ?>
+            <tbody>
+                <tr>
+                    <td scope="col"><?php echo $hotel['name'] ?></td>
+                    <td scope="col"><?php echo $hotel['description'] ?></td>
+                    <td scope="col"><?php echo $hotel['parking'] ? 'True' : 'False' ?></td>
+                    <td scope="col"><?php echo $hotel['vote'] ?></td>
+                    <td scope="col"><?php echo $hotel['distance_to_center'] ?></td>
+                </tr>
+            </tbody>
+        <?php } ?>
+    </table>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </body>
 
