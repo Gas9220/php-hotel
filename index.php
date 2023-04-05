@@ -36,6 +36,8 @@ $hotels = [
         'distance_to_center' => 50
     ],
 ];
+
+$parking_preference = $_GET['parking']
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +50,6 @@ $hotels = [
     <title>Hotels</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-
 </head>
 
 <body>
@@ -64,6 +65,16 @@ $hotels = [
         </div>
     <?php } ?> -->
 
+    <form action="index.php" method="get">
+        <select class="form-select w-50" name="parking">
+            <option value="no-preference" selected>No preference</option>
+            <option value="1">Parking</option>
+            <option value="0">No Parking</option>
+        </select>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+
     <table class="table">
         <thead>
             <tr>
@@ -72,17 +83,17 @@ $hotels = [
                 <?php } ?>
             </tr>
         </thead>
-        <?php foreach ($hotels as $key => $hotel) { ?>
-            <tbody>
-                <tr>
+        <tbody>
+            <?php foreach ($hotels as $key => $hotel) { ?>
+                <tr class="<?= ($hotel['parking'] == $parking_preference) || ($parking_preference == 'no-preference') ? '' : 'd-none' ?>">
                     <td scope="col"><?php echo $hotel['name'] ?></td>
                     <td scope="col"><?php echo $hotel['description'] ?></td>
                     <td scope="col"><?php echo $hotel['parking'] ? 'True' : 'False' ?></td>
                     <td scope="col"><?php echo $hotel['vote'] ?></td>
                     <td scope="col"><?php echo $hotel['distance_to_center'] ?></td>
                 </tr>
-            </tbody>
-        <?php } ?>
+            <?php } ?>
+        </tbody>
     </table>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </body>
