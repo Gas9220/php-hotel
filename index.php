@@ -37,7 +37,8 @@ $hotels = [
     ],
 ];
 
-$parking_preference = $_GET['parking']
+$select_value = $_GET['parking'];
+$parking_preference = $select_value === 'no-preference' ? null : $select_value;
 ?>
 
 <!DOCTYPE html>
@@ -65,13 +66,13 @@ $parking_preference = $_GET['parking']
         </div>
     <?php } ?> -->
 
-    <form action="index.php" method="get">
-        <select class="form-select w-50" name="parking">
+    <form class="p-3" action="index.php" method="get">
+        <select class="form-select w-50 d-inline" name="parking">
             <option value="no-preference" selected>No preference</option>
             <option value="1">Parking</option>
             <option value="0">No Parking</option>
         </select>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Confirm</button>
     </form>
 
 
@@ -85,10 +86,10 @@ $parking_preference = $_GET['parking']
         </thead>
         <tbody>
             <?php foreach ($hotels as $key => $hotel) { ?>
-                <tr class="<?= ($hotel['parking'] == $parking_preference) || ($parking_preference == 'no-preference') ? '' : 'd-none' ?>">
+                <tr class="<?= ($hotel['parking'] == $parking_preference) || ($parking_preference == null) ? '' : 'd-none' ?>">
                     <td scope="col"><?php echo $hotel['name'] ?></td>
                     <td scope="col"><?php echo $hotel['description'] ?></td>
-                    <td scope="col"><?php echo $hotel['parking'] ? 'True' : 'False' ?></td>
+                    <td scope="col"><?php echo $hotel['parking'] ? 'Yes' : 'No' ?></td>
                     <td scope="col"><?php echo $hotel['vote'] ?></td>
                     <td scope="col"><?php echo $hotel['distance_to_center'] ?></td>
                 </tr>
